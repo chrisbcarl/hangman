@@ -1,0 +1,62 @@
+
+GLOBALS URGH
+max_guesses = 8
+game_over = false
+player_wins = false
+player_guesses = 0
+player_word = ''
+blanks = '------'
+
+draw_blanks(secret_word) -> null (UI), uses blanks
+draw_blanks_correct(letter)
+draw_hangman(step_number) -> null (UI)
+draw_game_state(guesses, game_over, player_wins) -> null (UI)
+generate_secret_word() -> string
+activate_letter_guess_box() -> null (UI)
+activate_word_guess_box() -> null (UI)
+letter_in_word(letter, secret_word) -> bool
+letter.lower
+secret_word.lower
+guessed_word_is_correct(guessed_word, secret_word)
+player_word_guess.lower() == secret_word.lower()
+
+()() -> null (UI, evnent listerner callback)
+letter_pressed = this.innerHTML
+
+get_letter_pressed()
+while letter_pressed == null:
+    continue
+return letter_pressed
+
+play_hangman()
+    secret_word = generate_secret_word()
+    draw_blanks(secret_word)
+
+    while guesses < max_guesses & player_word != secret_word:
+        while player_letter_guess == null | player_word_guess == null:
+        continue
+
+        if player_letter_guess != null:
+        if letter_in_word(letter, secret_word):
+            draw_blanks_correct(player_letter_guess)
+            if guessed_word_is_correct(blanks, secret_word)
+            game_over = true
+            player_wins = true
+            // here we'd do the guess word logic
+            continue
+        else:
+            guesses += 1
+        else if player_word_guess != null:
+        if guessed_word_is_correct(player_word_guess, secret_word):
+            game_over = true
+            player_wins = true
+        else:
+            guesses += 1
+
+        if not game_over:
+        draw_hangman(guesses)
+        draw_game_state(guesses, game_over, player_wins)
+        else:
+        draw_game_state(guesses, game_over, player_wins)
+        break
+
