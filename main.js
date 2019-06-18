@@ -90,7 +90,7 @@ hangman_noose.classList.add('fadeinout');
 // html generic functions
 function toggle_show(id) {
     const element = document.getElementById(id);
-    element.classList.toggle('fadeinout');
+    element.classList.toggle('fade');
 }
 var click_$event = new MouseEvent('click', {
     'view': window,
@@ -232,22 +232,27 @@ function guessed_word_is_correct() {
     }
 }
 function draw_congratulations(success) {
-    element_drawn_or_pressed['congratulations'] = true;
     if (success) {
         congratulations.innerHTML = 'You\'ve won! Congratulations! Take what you\'ve learned with you on your journey to becoming a world-class programmer!';
-        congratulations.setAttribute('class', 'alert alert-success');
+        congratulations.classList.add('alert');
+        congratulations.classList.add('alert-success');
     }
     else {
         congratulations.innerHTML = 'You\'ve lost! Comiserations! At least now you know some areas where you can improve! Never give up and always do your best!';
-        congratulations.setAttribute('class', 'alert alert-warning');
+        congratulations.classList.add('alert');
+        congratulations.classList.add('alert-warning');
     }
     toggle_show('congratulations');
 }
 function reset() {
     game_instructions.innerHTML = `Get ready for a new game with ${max_guesses} guesses!`;
-    congratulations.innerHTML = '';
     toggle_show('congratulations');
-    congratulations.setAttribute('class', '');
+    setTimeout(() => {
+        congratulations.classList.add('alert');
+        congratulations.classList.add('alert-success');
+        congratulations.classList.add('alert-warning');
+        congratulations.innerHTML = '';
+    }, 1500);
     toggle_show('hangman-stand-base');
     toggle_show('hangman-stand-rod');
     toggle_show('hangman-stand-top');
@@ -262,7 +267,6 @@ function reset() {
     toggle_show('hangman-noose');
 
     element_drawn_or_pressed = {
-        'congratulations': false,
         'hangman-stand-base': false,
         'hangman-stand-rod': false,
         'hangman-stand-top': false,
