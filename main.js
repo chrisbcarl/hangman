@@ -3,7 +3,7 @@ var alphabet = [
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
     'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
     't', 'u', 'v', 'w', 'x', 'y', 'z'
-];
+]
 var movies = [
     'Title', 'Inside Out', 'Django Unchained', 'La La Land', 'Gravity', 'Black Swan', 'Mad Max: Fury Road', 'Avengers: Endgame', 'Coco', 'Toy Story 3', 'Inception', 'True Grit', 'How to Train Your Dragon', 'Looper',
     'Shutter Island', 'The Wolf of Wall Street', 'The Grand Budapest Hotel', 'Guardians of the Galaxy', 'Whiplash', 'The Revenant', 'Star Wars: Episode VII - The Force Awakens', 'Arrival', 'Hacksaw Ridge', 'Avengers: Infinity War',
@@ -14,7 +14,15 @@ var movies = [
     'Bad Times at the El Royale', 'Roma', 'The Disaster Artist', 'Incredibles 2', 'The Big Sick', 'The Martian', 'Searching for Sugar Man', '12 Years a Slave', 'Her', 'Short Term 12', 'Captain America: The Winter Soldier', 'Argo',
     'Spotlight', 'Room', 'Three Identical Strangers', 'Incendies', 'Nebraska', 'The Cove', '127 Hours', 'Rise of the Planet of the Apes', 'Thor: Ragnarok', 'Kedi', 'Before Midnight', 'Intouchables', 'Kick-Ass',
     'Joheunnom nabbeunnom isanghannom', 'Fast Five', 'X: First Class', 'Deadwood'
-];
+]
+var body_parts = [
+    'hangman-head', 'hangman-neck', 'hangman-left-arm',
+    'hangman-right-arm', 'hangman-torso', 'hangman-left-leg', 'hangman-right-leg',
+    'hangman-noose',
+]
+var gallow_parts = [
+    'hangman-stand-base', 'hangman-stand-rod', 'hangman-stand-top',
+]
 var game_over = true;
 var player_wins = false;
 var max_guesses = 8;
@@ -44,10 +52,12 @@ const buttons = document.createElement('ul');
 function letter_button_click() {
     player_letter = this.innerHTML;
     if (!game_over) {
-        this.classList.add('active-letter');
-        console.log(`button ${this.innerHTML.toUpperCase()} was pressed`);
-        // WHERE CODE GETS EXECUTED
-        play_hangman();
+        if (!this.classList.contains('active-letter')) {
+            this.classList.add('active-letter');
+            console.log(`button ${this.innerHTML.toUpperCase()} was pressed`);
+            // WHERE CODE GETS EXECUTED
+            play_hangman();
+        }
     }
 }
 buttons.id = 'alphabet';
@@ -61,31 +71,12 @@ for (var i = 0; i < alphabet.length; i++) {
     buttons.appendChild(list_element);
 }
 
-// hangman images
-const hangman_stand_base = document.getElementById('hangman-stand-base');
-hangman_stand_base.classList.add('fadeinout');
-const hangman_stand_rod = document.getElementById('hangman-stand-rod');
-hangman_stand_rod.classList.add('fadeinout');
-const hangman_stand_top = document.getElementById('hangman-stand-top');
-hangman_stand_top.classList.add('fadeinout');
-const hangman_head = document.getElementById('hangman-head');
-hangman_head.classList.add('fadeinout');
-const hangman_neck = document.getElementById('hangman-neck');
-hangman_neck.classList.add('fadeinout');
-const hangman_left_arm = document.getElementById('hangman-left-arm');
-hangman_left_arm.classList.add('fadeinout');
-const hangman_right_arm = document.getElementById('hangman-right-arm');
-hangman_right_arm.classList.add('fadeinout');
-const hangman_torso = document.getElementById('hangman-torso');
-hangman_torso.classList.add('fadeinout');
-const hangman_left_leg = document.getElementById('hangman-left-leg');
-hangman_left_leg.classList.add('fadeinout');
-const hangman_right_leg = document.getElementById('hangman-right-leg');
-hangman_right_leg.classList.add('fadeinout');
-const hangman_smile = document.getElementById('hangman-smile');
-hangman_smile.classList.add('fadeinout');
-const hangman_noose = document.getElementById('hangman-noose');
-hangman_noose.classList.add('fadeinout');
+// hangman body parts
+for (const body_part of body_parts) {
+    let html_dom_element = document.getElementById(body_part);
+    html_dom_element.classList.add('fadeinout');
+    html_dom_element.classList.add('fade');
+}
 
 // html generic functions
 function toggle_show(id) {
@@ -145,54 +136,29 @@ function draw_blanks_correct() {
     blanks_paragraph.innerHTML = blanks;
 }
 function draw_hangman() {
-    switch (player_guesses) {
-        case 1:
-            if (!element_drawn_or_pressed['hangman-head'])
-                toggle_show('hangman-head');
-                element_drawn_or_pressed['hangman-head'] = true;
-
-            if (!element_drawn_or_pressed['hangman-smile'])
-                toggle_show('hangman-smile');
-                element_drawn_or_pressed['hangman-smile'] = true;
-            break;
-        case 2:
-            if (!element_drawn_or_pressed['hangman-neck'])
-                toggle_show('hangman-neck');
-                element_drawn_or_pressed['hangman-neck'] = true;
-            break;
-        case 3:
-            if (!element_drawn_or_pressed['hangman-left-arm'])
-                toggle_show('hangman-left-arm');
-                element_drawn_or_pressed['hangman-left-arm'] = true;
-            break;
-        case 4:
-            if (!element_drawn_or_pressed['hangman-right-arm'])
-                toggle_show('hangman-right-arm');
-                element_drawn_or_pressed['hangman-right-arm'] = true;
-            break;
-        case 5:
-            if (!element_drawn_or_pressed['hangman-torso'])
-                toggle_show('hangman-torso');
-                element_drawn_or_pressed['hangman-torso'] = true;
-            break;
-        case 6:
-            if (!element_drawn_or_pressed['hangman-left-leg'])
-                toggle_show('hangman-left-leg');
-                element_drawn_or_pressed['hangman-left-leg'] = true;
-            break;
-        case 7:
-            if (!element_drawn_or_pressed['hangman-right-leg'])
-                toggle_show('hangman-right-leg');
-                element_drawn_or_pressed['hangman-right-leg'] = true;
-            break;
-        case 8:
-            if (!element_drawn_or_pressed['hangman-noose'])
-                toggle_show('hangman-noose');
-                element_drawn_or_pressed['hangman-noose'] = true;
-            break;
-        default:
-            break;
+    const body_part = body_parts[player_guesses - 1];
+    if (body_part && !element_drawn_or_pressed[body_part]) {
+        toggle_show(body_part);
+        element_drawn_or_pressed[body_part] = true;
     }
+}
+function erase_hangman() {
+    for (const body_part of body_parts) {
+        if (element_drawn_or_pressed[body_part])
+            toggle_show(body_part);
+        element_drawn_or_pressed[body_part] = false;
+    }
+}
+function toggle_gallows() {
+    setTimeout(() => {
+        toggle_show('hangman-stand-base');
+    }, 500);
+    setTimeout(() => {
+        toggle_show('hangman-stand-rod');
+    }, 1000);
+    setTimeout(() => {
+        toggle_show('hangman-stand-top');
+    }, 1500);
 }
 function draw_game_state() {
     let text = '';
@@ -253,33 +219,8 @@ function reset() {
         congratulations.classList.add('alert-warning');
         congratulations.innerHTML = '';
     }, 1500);
-    toggle_show('hangman-stand-base');
-    toggle_show('hangman-stand-rod');
-    toggle_show('hangman-stand-top');
-    toggle_show('hangman-head');
-    toggle_show('hangman-smile');
-    toggle_show('hangman-neck');
-    toggle_show('hangman-left-arm');
-    toggle_show('hangman-right-arm');
-    toggle_show('hangman-torso');
-    toggle_show('hangman-left-leg');
-    toggle_show('hangman-right-leg');
-    toggle_show('hangman-noose');
-
-    element_drawn_or_pressed = {
-        'hangman-stand-base': false,
-        'hangman-stand-rod': false,
-        'hangman-stand-top': false,
-        'hangman-head': false,
-        'hangman-smile': false,
-        'hangman-neck': false,
-        'hangman-left-arm': false,
-        'hangman-right-arm': false,
-        'hangman-torso': false,
-        'hangman-left-leg': false,
-        'hangman-right-leg': false,
-        'hangman-noose': false,
-    };
+    erase_hangman();
+    toggle_gallows();
 
     game_over = false;
     player_wins = false;
@@ -309,19 +250,12 @@ function reset() {
     }
 
     setTimeout(() => {
-        toggle_show('hangman-stand-base');
-        element_drawn_or_pressed['hangman-stand-base'] = false
         draw_game_state();
+    }, 1000);
+
+    setTimeout(() => {
+        toggle_gallows();
     }, 1500);
-    setTimeout(() => {
-        toggle_show('hangman-stand-rod');
-        element_drawn_or_pressed['hangman-stand-rod'] = false
-    }, 2000);
-    setTimeout(() => {
-        toggle_show('hangman-stand-top');
-        element_drawn_or_pressed['hangman-stand-top'] = false
-        game_instructions.innerHTML = `Guess a letter with one of the buttons!`;
-    }, 2500);
 }
 
 
