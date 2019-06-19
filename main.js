@@ -255,7 +255,7 @@ function reset() {
 
     setTimeout(() => {
         toggle_gallows();
-    }, 1500);
+    }, 2000);
 }
 
 
