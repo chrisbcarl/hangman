@@ -5,6 +5,7 @@ This is for demonstrations of pseudocode using HTML / CSS / JavaScript
 Either:
 1. Open up a browser like Chrome, Firefox, IE, Edge, Opera, etc and drag the `index.html` file on top of the browser window.
 2. Double click the `index.html` file and the default browser will automatically open it.
+3. Python 3: `python -m http.server --directory .`
 
 # Further Learning
 * [freeCodeCamp - HTML / CSS / JavaScript](https://learn.freecodecamp.org/)

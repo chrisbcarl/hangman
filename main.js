@@ -199,12 +199,15 @@ function guessed_word_is_correct() {
 }
 function draw_congratulations(success) {
     if (success) {
-        congratulations.innerHTML = 'You\'ve won! Congratulations! Take what you\'ve learned with you on your journey to becoming a world-class programmer!';
+        congratulations.innerHTML = `You\'ve won! Congratulations! Take what you\'ve learned ` +
+            `with you on your journey to becoming a world-class programmer!`;
         congratulations.classList.add('alert');
         congratulations.classList.add('alert-success');
     }
     else {
-        congratulations.innerHTML = 'You\'ve lost! Comiserations! At least now you know some areas where you can improve! Never give up and always do your best!';
+        congratulations.innerHTML = `You\'ve lost! Comiserations! At least now you know some ` +
+            `areas where you can improve! Never give up and always do your best! The phrase ` +
+            `was "${secret_word}".`;
         congratulations.classList.add('alert');
         congratulations.classList.add('alert-warning');
     }

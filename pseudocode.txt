@@ -33,30 +33,31 @@ play_hangman()
     draw_blanks(secret_word)
 
     while guesses < max_guesses & player_word != secret_word:
+        player_letter_guess = get_player_guess()
         while player_letter_guess == null | player_word_guess == null:
-        continue
+            continue
 
         if player_letter_guess != null:
-        if letter_in_word(letter, secret_word):
-            draw_blanks_correct(player_letter_guess)
-            if guessed_word_is_correct(blanks, secret_word)
-            game_over = true
-            player_wins = true
-            // here we'd do the guess word logic
-            continue
-        else:
-            guesses += 1
+            if letter_in_word(letter, secret_word):
+                draw_blanks_correct(player_letter_guess)
+                if guessed_word_is_correct(blanks, secret_word)
+                    game_over = true
+                    player_wins = true
+                    // here we'd do the guess word logic
+                    continue
+            else:
+                guesses += 1
         else if player_word_guess != null:
-        if guessed_word_is_correct(player_word_guess, secret_word):
-            game_over = true
-            player_wins = true
-        else:
-            guesses += 1
+            if guessed_word_is_correct(player_word_guess, secret_word):
+                game_over = true
+                player_wins = true
+            else:
+                guesses += 1
 
         if not game_over:
-        draw_hangman(guesses)
-        draw_game_state(guesses, game_over, player_wins)
+            draw_hangman(guesses)
+            draw_game_state(guesses, game_over, player_wins)
         else:
-        draw_game_state(guesses, game_over, player_wins)
-        break
+            draw_game_state(guesses, game_over, player_wins)
+            break
 
